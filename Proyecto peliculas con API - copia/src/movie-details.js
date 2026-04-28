@@ -242,6 +242,7 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
   contentWrapper.style.width = '100%';
   contentWrapper.style.display = 'flex';
   contentWrapper.style.flexDirection = 'column';
+  contentWrapper.style.alignItems = 'center';
 
  
   contentWrapper.appendChild(detallesElemento);

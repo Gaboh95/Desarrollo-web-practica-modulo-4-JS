@@ -2,15 +2,13 @@
 .contenedor-detalles {
     position: relative;
     display: flex;
-    justify-items: center;
+    
     align-items: center;
-    align-content: center;
+
     margin-left: 0px;
     margin-top: 40px;
     margin-bottom: 70px;
-    width: 100vw;
-    max-width: 1910px;
-    margin-left: calc(-50vw + 50%);
+    max-width: 1500px;
 }
 
 .info-div {
@@ -21,7 +19,7 @@
 
 .movie-details-description {
 
-    width: 80%;
+    
 
 
 }
@@ -289,16 +287,11 @@
 
 
 .btn-back {
-    /* --- Posicionamiento Persistente --- */
     position: fixed;
     top: 80px;
     left: 10px;
     z-index: 1000;
-    /* Asegura que siempre esté por encima de todo el contenido */
-
-    /* --- Estética --- */
-    background-color: #12107c;
-    /* Rojo estilo Netflix, cámbialo por tu color principal si lo deseas */
+    background-color: #12107c;   
     color: #ffffff;
     font-family: inherit;
     font-size: 1rem;
@@ -306,25 +299,18 @@
     padding: 7px 14px;
     border: none;
     border-radius: 50px;
-    /* Forma de píldora */
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    /* Sombra suave para dar profundidad */
     transition: all 0.3s ease;
-    /* Transición fluida para las animaciones */
-
-    /* --- Comportamiento Hover y Active --- */
+   
     &:hover {
         transform: translateY(-3px);
-        /* Se eleva un poco al pasar el ratón */
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
         background-color: #0b1058;
-        /* Un tono ligeramente más claro al pasar el ratón */
     }
 
     &:active {
         transform: translateY(1px);
-        /* Efecto de hundimiento al hacer clic */
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 }
