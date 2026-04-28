@@ -105,7 +105,6 @@ export async function getMovieDetails(id) {
     }
 
     const data = await response.json();
-    console.log("Datos recibidos de la API:", data);
     return formatMovieDetails(data);
 
     } catch (error){
