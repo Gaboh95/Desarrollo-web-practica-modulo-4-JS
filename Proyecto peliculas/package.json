@@ -1,0 +1,18 @@
+{
+  "name": "b16-mod3-js-advanced-practice",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "sass": "^1.80.3",
+    "vite": "^5.4.8"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  }
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movies practice</title>
+  </head>
+  <body>
+    <!-- TOP NAVBAR -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center">
+          <img src="logo.png" alt="Filmax logo" />
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarCollapse"
+          aria-controls="navbarCollapse"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul
+            class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+          >
+            <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+          </ul>
+
+          <form class="d-flex" role="search">
+            <input
+              id="search-movie-input"
+              class="form-control me-2"
+              type="search"
+              placeholder="Buscar pelicula"
+              aria-label="Search"
+            />
+            <button id="search-movie-btn" class="btn btn-primary" type="submit">
+              Buscar
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <!-- APP -->
+    <div id="app"></div>
+
+    <!-- FOOTER -->
+    <footer class="py-3 mt-4 bg-dark text-white">
+      <div
+        class="container d-flex flex-wrap justify-content-between align-items-center"
+      >
+        <p class="col-md-4 mb-0">© 2021 Company, Inc</p>
+
+        <a
+          href="/"
+          class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
+        >
+          <img src="logo.png" alt="Filmax logo" />
+        </a>
+
+        <ul class="nav col-md-4 justify-content-end">
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2">Features</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2">FAQs</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2">About</a>
+          </li>
+        </ul>
+      </div>
+    </footer>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

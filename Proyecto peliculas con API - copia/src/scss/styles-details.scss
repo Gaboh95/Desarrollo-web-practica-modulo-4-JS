@@ -1,0 +1,330 @@
+//seccion detalles
+.contenedor-detalles {
+    position: relative;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    margin-left: 0px;
+    margin-top: 40px;
+    margin-bottom: 70px;
+    width: 100vw;
+    max-width: 1910px;
+    margin-left: calc(-50vw + 50%);
+}
+
+.info-div {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.movie-details-description {
+
+    width: 80%;
+
+
+}
+
+.movie-details-description span {
+    font-weight: bold;
+    font-size: 28px;
+}
+
+.movie-details-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(20%);
+    z-index: -1;
+
+}
+
+.movie-details-poster {
+    margin: 40px;
+    height: 100%;
+    width: auto;
+    border-radius: 8px;
+}
+
+
+
+
+
+
+//seccion actores
+.actores-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 70px;
+
+    .actores-title {
+        width: 100%;
+        max-width: 1500px;
+        padding-left: 20px;
+        text-align: left;
+        font-size: 28px;
+        font-weight: bold;
+
+    }
+}
+
+.actores-list {
+    display: flex;
+    max-width: 1500px;
+    margin: 0;
+    gap: 5px;
+    list-style: none;
+    padding: 10px;
+    overflow-x: auto;
+    overscroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
+    justify-content: flex-start;
+
+
+    p {
+        color: rgb(255, 251, 251);
+        font-weight: bold;
+        font-size: 14px;
+        margin: 7px 0px 5px 0px;
+        padding: 0px 5px 0px 9px;
+
+    }
+
+    .actor-character {
+        font-size: 12px;
+        color: rgba(250, 247, 247, 0.637);
+        font-weight: normal;
+        margin: 0;
+
+    }
+
+    li {
+        max-width: 140px;
+        flex-shrink: 0;
+        border-radius: 8px;
+        border: 2px solid #151535;
+        background-color: rgba(25, 24, 34, 0.452);
+        -webkit-box-shadow: -1px 2px 15px 0px #c99999;
+        box-shadow: -1px 2px 15px 0px #000000;
+        margin: 0px 4px 10px 10px;
+        padding: 0px 0px 10px;
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+
+        .actor-photo {
+            width: 138px;
+            height: 175px;
+            object-fit: cover;
+            border-radius: 8px 8px 0px 0px;
+        }
+    }
+}
+
+//seccion reseñas
+.reviews-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 90px;
+
+
+    .reviews-title {
+        width: 100%;
+        max-width: 1500px;
+        padding-left: 20px;
+        text-align: left;
+        font-size: 28px;
+        font-weight: bold;
+
+    }
+
+    .review-item {
+        width: 100%;
+        max-width: 1500px;
+        background-color: rgba(25, 24, 34, 0.452);
+        border-radius: 8px;
+        border: 2px solid #151535;
+        -webkit-box-shadow: -1px 2px 15px 0px #c99999;
+        box-shadow: -1px 2px 15px 0px #000000;
+        margin: 10px 0px 60px 10px;
+        padding: 15px 0px 15px 15px;
+
+        .review-author {
+            font-weight: bold;
+            font-size: 16px;
+            align-content: center;
+            margin-bottom: 10px;
+            color: rgb(255, 251, 251);
+
+        }
+
+        .review-author-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        .review-content {
+            font-size: 21px;
+            color: rgba(250, 247, 247, 0.637);
+            font-weight: normal;
+            text-align: justify;
+            margin-top: 20px;
+            text-align: start;
+
+        }
+    }
+}
+
+
+
+//seccion peliculas recomendadas en forma carrusel circular
+.recommendations-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 90px;
+
+    .recommendations-title {
+        width: 100%;
+        max-width: 1500px;
+        padding-left: 20px;
+        text-align: left;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .recommendations-list {
+        display: flex;
+        max-width: 1500px;
+        margin: 0;
+        gap: 5px;
+        list-style: none;
+        padding: 10px;
+        overflow-x: auto;
+        overscroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: #888 transparent;
+        justify-content: flex-start;
+
+
+        .recommendation-item {
+            position: relative;
+            max-width: 500px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            border: 2px solid #151535;
+            background-color: rgba(25, 24, 34, 0.452);
+            box-shadow: -1px 2px 15px 0px #000000;
+            margin: 0px 4px 10px 10px;
+            padding: 0px;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+
+            .recommendation-item-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+            .recommendation-poster {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 8px;
+                display: block;
+            }
+
+            .recommendation-title {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                color: rgb(255, 251, 251);
+                font-weight: bold;
+                font-size: 44px;
+                padding: 15px 9px;
+                background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+                display: none;
+                z-index: 2;
+            }
+
+            &:hover {
+                transform: scale(1.03);
+                
+                cursor: pointer;
+
+                .recommendation-poster {
+                    filter: brightness(50%);
+                }
+                .recommendation-title {
+                    display: block;
+                }
+            }
+        }
+
+
+        
+
+    }
+
+
+}
+
+
+
+
+
+.btn-back {
+    /* --- Posicionamiento Persistente --- */
+    position: fixed;
+    top: 80px;
+    left: 10px;
+    z-index: 1000;
+    /* Asegura que siempre esté por encima de todo el contenido */
+
+    /* --- Estética --- */
+    background-color: #12107c;
+    /* Rojo estilo Netflix, cámbialo por tu color principal si lo deseas */
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 7px 14px;
+    border: none;
+    border-radius: 50px;
+    /* Forma de píldora */
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    /* Sombra suave para dar profundidad */
+    transition: all 0.3s ease;
+    /* Transición fluida para las animaciones */
+
+    /* --- Comportamiento Hover y Active --- */
+    &:hover {
+        transform: translateY(-3px);
+        /* Se eleva un poco al pasar el ratón */
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        background-color: #0b1058;
+        /* Un tono ligeramente más claro al pasar el ratón */
+    }
+
+    &:active {
+        transform: translateY(1px);
+        /* Efecto de hundimiento al hacer clic */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+}
