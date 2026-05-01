@@ -36,9 +36,6 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
     sectionDetalles.className = "contenedor-detalles";
 
 
-    const poster = document.createElement('img');
-    poster.src = detalles.poster;
-    poster.className = "movie-details-poster"
 
     const infoDiv = document.createElement("div");
     infoDiv.className = "info-div";
@@ -51,24 +48,97 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
     backdrop.src = detalles.backdrop;
     backdrop.className = "movie-details-backdrop";
 
-    const rating = document.createElement("p");
-    rating.className = "movie-details-rating";
-    rating.textContent = `Rating: ${detalles.rating}`;
+    const ratingdiv = document.createElement("div");
+    ratingdiv.className = "movie-details-rating-div";
 
+    const rating = document.createElement("div");
+    rating.className = "movie-details-rating";
+    rating.textContent = `${detalles.rating}`;
+
+    const ratingStars = document.createElement("div");
+    ratingStars.className = "movie-details-rating-stars";
+    const fullStars = Math.floor(detalles.rating / 2);
+    const halfStar = detalles.rating % 2 >= 1;
+    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+    for (let i = 0; i < fullStars; i++) {
+      const star = document.createElement("span");
+      star.className = "star";
+      star.innerHTML = "★";
+      ratingStars.appendChild(star);
+    }
+
+    if (halfStar) {
+      const halfStarElement = document.createElement("span");
+      halfStarElement.className = "star";
+      halfStarElement.innerHTML = "☆";
+      ratingStars.appendChild(halfStarElement);
+    }
+
+    for (let i = 0; i < emptyStars; i++) {
+      const emptyStar = document.createElement("span");
+      emptyStar.className = "star";
+      emptyStar.innerHTML = "☆";
+      emptyStar.style.color = "#ccc";
+      ratingStars.appendChild(emptyStar);
+    }
+    ratingdiv.append(rating, ratingStars);
+    const miniDataDiv = document.createElement("div");
+    miniDataDiv.className = "movie-details-mini-data";
+    miniDataDiv.id = "mini-data-div";
+
+    const yearDiv = document.createElement("div");
+    yearDiv.className = "year-div";
     const year = document.createElement("p");
     year.className = "movie-details-year";
     year.textContent = `${detalles.year}`;
 
+    yearDiv.appendChild(year);
+    // Insertamos primero el elemento del año
+    miniDataDiv.append(yearDiv);
+
+    // Limpiamos y separamos la cadena de géneros de forma robusta
+    const genresString = String(detalles.genres);
+    const genresArray = genresString.includes(',')
+      ? genresString.split(',')
+      : genresString.split('  ');
+
+    // Iteramos para crear e insertar los <p> individuales
+    genresArray.forEach(genreText => {
+      if (genreText.trim() !== "") {
+        const genreElementdiv = document.createElement("div");
+        genreElementdiv.className = "genre-div";
+        const genreElement = document.createElement("p");
+        genreElement.className = "movie-details-genres";
+        genreElement.textContent = genreText.trim();
+        genreElementdiv.append(genreElement);
+        miniDataDiv.append(genreElementdiv);
+      }
+    });
+
+
     const description = document.createElement("p");
     description.className = "movie-details-description";
-    description.innerHTML = `<span>Descripción</span><br> ${detalles.description}`;
+    description.innerHTML = `${detalles.description}`;
 
+    const divDirector = document.createElement("div");
+    divDirector.className = "director-div";
+    divDirector.textContent = "Directed by ";
     const director = document.createElement("p");
     director.className = "movie-details-director";
-    director.textContent = `Director: ${detalles.director}`;
+    director.textContent = `${detalles.director}`;
+    divDirector.appendChild(director);
 
-    infoDiv.append(backdrop, title, rating, year, description, director);
-    sectionDetalles.append(poster, infoDiv, btnback);
+    const divPoster = document.createElement("div");
+    divPoster.className = "poster-div";
+
+    const poster = document.createElement('img');
+    poster.src = detalles.poster;
+    poster.className = "movie-details-poster"
+    divPoster.appendChild(poster);
+
+    infoDiv.append(backdrop, miniDataDiv, title, description, divDirector, ratingdiv);
+    sectionDetalles.append(infoDiv, divPoster, btnback);
 
     return sectionDetalles;
   }
@@ -244,13 +314,13 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
   contentWrapper.style.flexDirection = 'column';
   contentWrapper.style.alignItems = 'center';
 
- 
+
   contentWrapper.appendChild(detallesElemento);
   contentWrapper.appendChild(actoresElemento);
   contentWrapper.appendChild(resenasElemento);
   contentWrapper.appendChild(recomendacionesElemento);
 
-  
+
   mainContainer.appendChild(contentWrapper);
 
   // 4. El botón de regresar

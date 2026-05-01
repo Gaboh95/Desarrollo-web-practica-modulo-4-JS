@@ -18,7 +18,7 @@ let currentState = {
   search: '',
 }
 
-const movieContainer= document.createElement('div');
+const movieContainer = document.createElement('div');
 movieContainer.className = 'movie-container';
 
 const resultsMessage = document.createElement('div');
@@ -31,11 +31,14 @@ resultsMessage.style.display = 'none'
 
 function getStars(rating) {
   const starCount = Math.round(rating / 2);
-  return '★'.repeat(starCount) + '☆'.repeat(5 - starCount);
-  
+  const filledStars = '★'.repeat(starCount);
+  const emptyStars = '☆'.repeat(5 - starCount);
+
+  // Devolvemos un string de HTML
+  return `<span class="star-filled">${filledStars}</span><span class="star-empty">${emptyStars}</span>`;
 }
 
-function createPosterElement(poster){
+function createPosterElement(poster) {
   const element = document.createElement('img');
   element.src = poster;
   element.className = 'movie-poster';
@@ -70,7 +73,7 @@ function createDescriptionElement(description) {
   return element;
 }
 
-function createMovieInfoLine(label, value){
+function createMovieInfoLine(label, value) {
   const element = document.createElement('div');
   element.className = 'movie-other';
   const span = document.createElement('span');
@@ -89,9 +92,9 @@ function createMovieElement(movieObj) {
   posterElement.addEventListener('click', () => {
     lastscrollPosition = window.scrollY;
     showMovieDetails(
-      movieObj.id, 
-      movieContainer, 
-      divContenedor, 
+      movieObj.id,
+      movieContainer,
+      divContenedor,
       applyFiltersAndRender,
       lastscrollPosition
     );
@@ -109,8 +112,8 @@ function createMovieElement(movieObj) {
 }
 
 //Funcion para crear la tarjeta en lista
-function createMovieListElement(movieObj){
-  const element =document.createElement('div');
+function createMovieListElement(movieObj) {
+  const element = document.createElement('div');
   element.className = 'movie-list-item';
 
   const img = document.createElement('img');
@@ -124,9 +127,9 @@ function createMovieListElement(movieObj){
   title.addEventListener('click', () => {
     lastscrollPosition = window.scrollY;
     showMovieDetails(
-      movieObj.id, 
-      movieContainer, 
-      divContenedor, 
+      movieObj.id,
+      movieContainer,
+      divContenedor,
       applyFiltersAndRender,
       lastscrollPosition
     );
@@ -137,7 +140,7 @@ function createMovieListElement(movieObj){
 
   const stars = document.createElement('span');
   stars.className = 'movie-stars';
-  stars.textContent = getStars(movieObj.rating);
+  stars.innerHTML = getStars(movieObj.rating);
 
   const randomReviews = Math.floor(Math.random() * 500) + 1;
   const reviews = document.createElement('span');
@@ -189,7 +192,7 @@ const categoriesMap = Object.freeze({
 });
 
 function applyFiltersAndRender() {
-  let result = [...movies]; 
+  let result = [...movies];
 
   // 1. Filtrar por Categoría
   if (currentState.category !== 'noFiltrar') {
@@ -206,15 +209,15 @@ function applyFiltersAndRender() {
     const query = currentState.search.toLowerCase();
     result = result.filter(movie => {
       return movie.title.toLowerCase().includes(query) ||
-             movie.director.toLowerCase().includes(query) ||
-             movie.actors.toLowerCase().includes(query) ||
-             movie.year.toString().includes(query);
+        movie.director.toLowerCase().includes(query) ||
+        movie.actors.toLowerCase().includes(query) ||
+        movie.year.toString().includes(query);
     });
   }
 
   // 3. Ordenacion
   result.sort((a, b) => {
-    switch (currentState.sort){
+    switch (currentState.sort) {
       case 'titleAsc': return a.title.localeCompare(b.title);
       case 'titleDesc': return b.title.localeCompare(a.title);
       case 'directorAsc': return a.director.localeCompare(b.director);
@@ -225,7 +228,7 @@ function applyFiltersAndRender() {
     }
   });
   // 4. Mensaje de cuantas peliculas encuentra
-  if (currentState.search !== '' || currentState.category !== 'noFiltrar'){
+  if (currentState.search !== '' || currentState.category !== 'noFiltrar') {
     resultsMessage.style.display = 'block';
     resultsMessage.textContent = `Se han encontrado [${result.length}] peliculas que coinciden con la busqueda `;
   } else {
@@ -257,12 +260,12 @@ const gridSvg = `<svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="
 
 //Boton grid
 const buttonGrid = document.createElement('button');
-buttonGrid.className ='grid fake-button';
+buttonGrid.className = 'grid fake-button';
 buttonGrid.innerHTML = gridSvg;
 
 //boton list
 const buttonList = document.createElement('button');
-buttonList.className ='list fake-button';
+buttonList.className = 'list fake-button';
 buttonList.innerHTML = listSvg;
 
 buttonsContainer.append(buttonGrid, buttonList);
@@ -291,31 +294,31 @@ Object.entries(tmdbOptions).forEach(([key, text]) => {
 const selectCategory = document.createElement('select');
 selectCategory.className = 'select categories';
 Object.entries(categoriesMap).forEach(([key, value]) => {
-    const option = document.createElement('option');
-    option.value = key;
-    option.textContent = value;
-    selectCategory.appendChild(option);
+  const option = document.createElement('option');
+  option.value = key;
+  option.textContent = value;
+  selectCategory.appendChild(option);
 })
 
 // Selector de ordenación 
 const sortOptionsMap = {
-    default: "Ordenar por...",
-    titleAsc: "Titulo (A-Z)",
-    titleDesc: "Titulo (Z-A)",
-    directorAsc: "Director (A-Z)",
-    directorDesc: "Director (Z-A)",
-    yearAsc: "Año (Antiguas primero)",
-    yearDesc: "Año (Nuevas primero)",
+  default: "Ordenar por...",
+  titleAsc: "Titulo (A-Z)",
+  titleDesc: "Titulo (Z-A)",
+  directorAsc: "Director (A-Z)",
+  directorDesc: "Director (Z-A)",
+  yearAsc: "Año (Antiguas primero)",
+  yearDesc: "Año (Nuevas primero)",
 };
 const selectSort = document.createElement('select');
 selectSort.className = 'select sort';
-Object.entries(sortOptionsMap).forEach(([key, text])=> {
-    const option = document.createElement('option');
-    option.value = key;
-    option.textContent = text;
-    selectSort.appendChild(option);
+Object.entries(sortOptionsMap).forEach(([key, text]) => {
+  const option = document.createElement('option');
+  option.value = key;
+  option.textContent = text;
+  selectSort.appendChild(option);
 
-}); 
+});
 
 // barra de busqueda
 const searchInput = document.createElement('input');
@@ -357,14 +360,14 @@ btnReset.addEventListener('click', () => {
   selectCategory.value = 'noFiltrar';
   selectSort.value = 'default';
   searchInput.value = '';
-  
+
   currentState = { category: 'noFiltrar', sort: 'default', search: '' };
   applyFiltersAndRender();
 });
 
 buttonGrid.addEventListener("click", () => {
   movieContainer.classList.remove("list-mode");
-  applyFiltersAndRender(); 
+  applyFiltersAndRender();
 });
 
 buttonList.addEventListener("click", () => {
@@ -399,7 +402,7 @@ async function initApp() {
   movies = await Promise.all(peliculasDetalles);
 
   applyFiltersAndRender();
-  
+
 }
 
 initApp();

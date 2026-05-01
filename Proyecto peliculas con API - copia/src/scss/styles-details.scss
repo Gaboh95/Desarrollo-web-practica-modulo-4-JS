@@ -2,55 +2,151 @@
 .contenedor-detalles {
     position: relative;
     display: flex;
-    
     align-items: center;
-
     margin-left: 0px;
     margin-top: 40px;
     margin-bottom: 70px;
-    max-width: 1500px;
+    width: 1500px;
+    height: 700px;
+
+
+    .info-div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        padding: 100px;
+
+    }
+
+    .movie-details-mini-data {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        gap: 10px;
+
+
+        .year-div {
+            display: grid;
+            align-items: center;
+            margin: 0px;
+            background: #ffffff12;
+            color: #ffffff73;
+            border: 0.5px solid #ffffff1f;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 20px;
+            letter-spacing: 0.4px;
+
+            p {
+                margin: 0px;
+                padding: 2px 8px;
+            }
+
+        }
+
+        .genre-div {
+            display: grid;
+            align-items: center;
+            margin: 0px;
+            background: #a050ff1f;
+            color: #b782f3;
+            border: 0.5px solid #a050ff40;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 20px;
+            letter-spacing: 0.4px;
+
+            p {
+                margin: 0px;
+                padding: 2px 8px;
+            }
+
+        }
+    }
+
+    .director-div{
+        display: flex;
+        gap : 5px;
+        font-weight: 300;
+        color: #ffffff9a;
+
+        p {
+            color: #ffffff;
+        }
+    }
+    .movie-details-title {
+        font-size: 60px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .movie-details-description {
+        max-width: 800px;
+        font-size: 1vw;
+        color: #ffffff9a;
+        font-weight: 400;
+        letter-spacing: 0.2px;
+        margin-bottom: 2.5%;
+        line-height: 1.6;
+    }
+
+    .movie-details-description span {
+        font-weight: bold;
+        font-size: 28px;
+    }
+
+    .movie-details-rating-div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        color: #f5c842;
+        font-size: 19px;
+        font-weight: 600;
+    }
+    .movie-details-backdrop {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+        filter: brightness(20%);
+        z-index: -1;
+
+    }
+
+    .poster-div {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        
+
+        .movie-details-poster {
+            margin: 40px;
+            max-width: 400px;
+            max-width: 400px;
+            height: 100%;
+            width: 80%;
+            border-radius: 8px;
+            transition: transform 2s ease;
+
+            &:hover {
+                transform: perspective(1000px) rotateY(-360deg);
+                
+                cursor: pointer;
+            }
+        }
+
+
+            
+    }
+
+
 }
-
-.info-div {
-    display: flex;
-    flex-direction: column;
-
-}
-
-.movie-details-description {
-
-    
-
-
-}
-
-.movie-details-description span {
-    font-weight: bold;
-    font-size: 28px;
-}
-
-.movie-details-backdrop {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(20%);
-    z-index: -1;
-
-}
-
-.movie-details-poster {
-    margin: 40px;
-    height: 100%;
-    width: auto;
-    border-radius: 8px;
-}
-
-
-
-
 
 
 //seccion actores
@@ -76,7 +172,7 @@
     display: flex;
     max-width: 1500px;
     margin: 0;
-    gap: 5px;
+    gap: 25px;
     list-style: none;
     padding: 10px;
     overflow-x: auto;
@@ -88,8 +184,9 @@
 
     p {
         color: rgb(255, 251, 251);
+        text-align: center;
         font-weight: bold;
-        font-size: 14px;
+        font-size: 18px;
         margin: 7px 0px 5px 0px;
         padding: 0px 5px 0px 9px;
 
@@ -107,12 +204,7 @@
         max-width: 140px;
         flex-shrink: 0;
         border-radius: 8px;
-        border: 2px solid #151535;
-        background-color: rgba(25, 24, 34, 0.452);
-        -webkit-box-shadow: -1px 2px 15px 0px #c99999;
-        box-shadow: -1px 2px 15px 0px #000000;
-        margin: 0px 4px 10px 10px;
-        padding: 0px 0px 10px;
+
         transition: transform 0.3s ease;
 
         &:hover {
@@ -121,10 +213,10 @@
         }
 
         .actor-photo {
-            width: 138px;
-            height: 175px;
+            width: 150px;
+            height: 150px;
             object-fit: cover;
-            border-radius: 8px 8px 0px 0px;
+            border-radius: 50%;
         }
     }
 }
@@ -233,14 +325,14 @@
             overflow: hidden;
 
             .recommendation-item-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
 
             .recommendation-poster {
-                width: 100%;
-                height: 100%;
+                width: 300px;
+                height: 500px;
                 object-fit: cover;
                 border-radius: 8px;
                 display: block;
@@ -253,7 +345,7 @@
                 right: 0;
                 color: rgb(255, 251, 251);
                 font-weight: bold;
-                font-size: 44px;
+                font-size: 24px;
                 padding: 15px 9px;
                 background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
                 display: none;
@@ -262,12 +354,13 @@
 
             &:hover {
                 transform: scale(1.03);
-                
+
                 cursor: pointer;
 
                 .recommendation-poster {
                     filter: brightness(50%);
                 }
+
                 .recommendation-title {
                     display: block;
                 }
@@ -275,7 +368,7 @@
         }
 
 
-        
+
 
     }
 
@@ -291,7 +384,7 @@
     top: 80px;
     left: 10px;
     z-index: 1000;
-    background-color: #12107c;   
+    background-color: #12107c;
     color: #ffffff;
     font-family: inherit;
     font-size: 1rem;
@@ -302,7 +395,7 @@
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
-   
+
     &:hover {
         transform: translateY(-3px);
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
