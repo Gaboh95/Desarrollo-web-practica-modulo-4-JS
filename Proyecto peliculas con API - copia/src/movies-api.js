@@ -20,7 +20,7 @@ function formatMovieDetails(apiData) {
     .map(actor => actor.name)
     .join(', ');
   const reparto = apiData.credits.cast
-    .slice(0, 13)
+    .slice(0, 10)
     .map(actor => {
       return {
         name: actor.name,
@@ -44,6 +44,10 @@ function formatMovieDetails(apiData) {
     .slice(0, 9)
     .map(peli => formatMovie(peli));
 
+  const trailerVideo = apiData.videos && apiData.videos.results 
+    ? apiData.videos.results.find(vid => vid.site === 'YouTube' && vid.type === 'Trailer')
+    : null;
+
 
   return {
     id: apiData.id,
@@ -60,14 +64,15 @@ function formatMovieDetails(apiData) {
     recommendations: peliculasRecomendadas,
     cast: reparto,
     reviews: apiData.reviews.results
-      .slice(0, 5)
+      .slice(0, 2)
       .map(review => ({
         author: review.author,
         content: review.content || review.text,
         // Aseguramos que el contenido no sea demasiado largo
         content: review.content && review.content.length > 400 ? review.content.substring(0, 800) + '...' : review.content || review.text,
         authordetails: review.author_details && review.author_details.avatar_path ? `https://image.tmdb.org/t/p/w200${review.author_details.avatar_path}` : `https://ui-avatars.com/api/?name=${encodeURIComponent(review.author || 'U')}&background=random&color=fff`,
-      }))
+      })),
+    trailerKey: trailerVideo ? trailerVideo.key : null,
   }
 }
 
@@ -98,7 +103,7 @@ export async function getMovies(type = 'popular') {
 //obtener data de peliculas
 export async function getMovieDetails(id) {
   try {
-    const url = `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=${LANGUAGE}&append_to_response=credits,recommendations,reviews`;
+    const url = `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=${LANGUAGE}&append_to_response=credits,recommendations,reviews,videos`;
     const response = await fetch(url);
 
 

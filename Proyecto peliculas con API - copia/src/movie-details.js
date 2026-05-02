@@ -137,7 +137,88 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
     poster.className = "movie-details-poster"
     divPoster.appendChild(poster);
 
-    infoDiv.append(backdrop, miniDataDiv, title, description, divDirector, ratingdiv);
+    const trailerDiv = document.createElement("div");
+    trailerDiv.className = "trailer-div";
+    const buttonTrailer = document.createElement("button");
+    buttonTrailer.className = "btn-trailer";
+    buttonTrailer.textContent = "Watch Trailer";
+    buttonTrailer.addEventListener("click", () => {
+      if (detalles.trailerKey) {
+        createModalTrailer(detalles.trailerKey);
+      }else{
+        alert("No trailer available for this movie.");
+      }
+    });
+
+  
+    function createModalTrailer(trailerUrl) {
+  const modalOverlay = document.createElement('div');
+  modalOverlay.className = 'modal-overlay';
+  modalOverlay.style.position = 'fixed';
+  modalOverlay.style.top = '0';
+  modalOverlay.style.left = '0';
+  modalOverlay.style.width = '100%';
+  modalOverlay.style.height = '100%';
+  modalOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+  modalOverlay.style.display = 'flex';
+  modalOverlay.style.justifyContent = 'center';
+  modalOverlay.style.alignItems = 'center';
+  modalOverlay.style.zIndex = '1000';
+
+
+  const videoContainer = document.createElement('div');
+  videoContainer.className = 'video-container';
+  videoContainer.style.position = 'relative';
+  videoContainer.style.width = '80%';
+  videoContainer.style.maxWidth = '800px';
+  videoContainer.style.aspectRatio = '16 / 9';
+  videoContainer.style.backgroundColor = '#000';
+  videoContainer.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.5)';
+
+  const closeButton = document.createElement('button');
+  closeButton.className = 'modal-close-button';
+  closeButton.textContent = 'X';
+  closeButton.style.position = 'absolute';
+  closeButton.style.top = '10px';
+  closeButton.style.right = '10px';
+  closeButton.style.fontSize = '24px';
+  closeButton.style.color = '#fff';
+  closeButton.style.background = 'transparent';
+  closeButton.style.border = 'none';
+  closeButton.style.cursor = 'pointer';
+
+  const iframe = document.createElement('iframe');
+  iframe.src = `https://www.youtube.com/embed/${trailerUrl}?autoplay=1&controls=1`;
+  iframe.style.width = '100%';
+  iframe.style.height = '100%';
+  iframe.style.border = 'none';
+  iframe.allowFullscreen = true;
+  iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+
+
+  videoContainer.appendChild(closeButton);
+  videoContainer.appendChild(iframe);
+  modalOverlay.appendChild(videoContainer);
+
+  document.body.appendChild(modalOverlay);
+
+  const closeModal = () => {
+    document.body.removeChild(modalOverlay);
+  };
+  closeButton.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+      closeModal();
+    }
+  });
+}
+
+    const trianglediv = document.createElement("div");
+    trianglediv.className = "triangle-div";
+    buttonTrailer.appendChild(trianglediv);
+    trailerDiv.appendChild(buttonTrailer);
+
+    infoDiv.append(backdrop, miniDataDiv, title, description, divDirector, ratingdiv, trailerDiv);
     sectionDetalles.append(infoDiv, divPoster, btnback);
 
     return sectionDetalles;
@@ -334,3 +415,4 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
     }, 0);
   });
 }
+
