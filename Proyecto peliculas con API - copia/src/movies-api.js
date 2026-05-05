@@ -20,7 +20,7 @@ function formatMovieDetails(apiData) {
     .map(actor => actor.name)
     .join(', ');
   const reparto = apiData.credits.cast
-    .slice(0, 10)
+    .slice(0, 17)
     .map(actor => {
       return {
         name: actor.name,

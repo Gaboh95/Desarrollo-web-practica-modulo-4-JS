@@ -137,7 +137,7 @@
             transition: transform 2s ease;
 
             &:hover {
-                transform: perspective(1000px) rotateY(-360deg);
+                transform: perspective(1000px) rotateY(-180deg);
 
                 cursor: pointer;
             }
@@ -204,6 +204,9 @@
     align-items: center;
     margin-top: 20px;
     margin-bottom: 70px;
+    user-select: none;
+
+
 
     .actores-title {
         width: 100%;
@@ -225,9 +228,12 @@
     padding: 10px;
     overflow-x: auto;
     overscroll-behavior: smooth;
-    scrollbar-width: thin;
+    scrollbar-width: none;
     scrollbar-color: #888 transparent;
     justify-content: flex-start;
+    cursor: grab;
+
+
 
 
     p {
@@ -242,7 +248,7 @@
 
     .actor-character {
         font-size: 14px;
-        color: rgba(250, 247, 247, 0.637);
+        color: #faf7f7a2;
         font-weight: normal;
         margin: 0;
 
@@ -253,11 +259,15 @@
         flex-shrink: 0;
         border-radius: 8px;
 
-        transition: transform 0.3s ease;
+        transition: transform 0.3s ease-out;
 
         &:hover {
             transform: scale(1.05);
-            cursor: pointer;
+
+        }
+
+        &:active {
+            cursor: grabbing;
         }
 
         .actor-photo {
@@ -265,6 +275,8 @@
             height: 150px;
             object-fit: cover;
             border-radius: 50%;
+            pointer-events: none;
+
         }
     }
 }
@@ -354,9 +366,10 @@
         padding: 10px;
         overflow-x: auto;
         overscroll-behavior: smooth;
-        scrollbar-width: thin;
+        scrollbar-width: none;
         scrollbar-color: #888 transparent;
         justify-content: flex-start;
+        cursor: grab;
 
 
         .recommendation-item {

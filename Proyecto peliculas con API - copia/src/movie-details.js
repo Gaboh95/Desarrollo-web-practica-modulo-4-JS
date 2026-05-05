@@ -94,16 +94,15 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
     year.textContent = `${detalles.year}`;
 
     yearDiv.appendChild(year);
-    // Insertamos primero el elemento del año
     miniDataDiv.append(yearDiv);
 
-    // Limpiamos y separamos la cadena de géneros de forma robusta
+
     const genresString = String(detalles.genres);
     const genresArray = genresString.includes(',')
       ? genresString.split(',')
       : genresString.split('  ');
 
-    // Iteramos para crear e insertar los <p> individuales
+
     genresArray.forEach(genreText => {
       if (genreText.trim() !== "") {
         const genreElementdiv = document.createElement("div");
@@ -145,73 +144,73 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
     buttonTrailer.addEventListener("click", () => {
       if (detalles.trailerKey) {
         createModalTrailer(detalles.trailerKey);
-      }else{
+      } else {
         alert("No trailer available for this movie.");
       }
     });
 
-  
+
     function createModalTrailer(trailerUrl) {
-  const modalOverlay = document.createElement('div');
-  modalOverlay.className = 'modal-overlay';
-  modalOverlay.style.position = 'fixed';
-  modalOverlay.style.top = '0';
-  modalOverlay.style.left = '0';
-  modalOverlay.style.width = '100%';
-  modalOverlay.style.height = '100%';
-  modalOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-  modalOverlay.style.display = 'flex';
-  modalOverlay.style.justifyContent = 'center';
-  modalOverlay.style.alignItems = 'center';
-  modalOverlay.style.zIndex = '1000';
+      const modalOverlay = document.createElement('div');
+      modalOverlay.className = 'modal-overlay';
+      modalOverlay.style.position = 'fixed';
+      modalOverlay.style.top = '0';
+      modalOverlay.style.left = '0';
+      modalOverlay.style.width = '100%';
+      modalOverlay.style.height = '100%';
+      modalOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+      modalOverlay.style.display = 'flex';
+      modalOverlay.style.justifyContent = 'center';
+      modalOverlay.style.alignItems = 'center';
+      modalOverlay.style.zIndex = '1000';
 
 
-  const videoContainer = document.createElement('div');
-  videoContainer.className = 'video-container';
-  videoContainer.style.position = 'relative';
-  videoContainer.style.width = '80%';
-  videoContainer.style.maxWidth = '800px';
-  videoContainer.style.aspectRatio = '16 / 9';
-  videoContainer.style.backgroundColor = '#000';
-  videoContainer.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.5)';
+      const videoContainer = document.createElement('div');
+      videoContainer.className = 'video-container';
+      videoContainer.style.position = 'relative';
+      videoContainer.style.width = '80%';
+      videoContainer.style.maxWidth = '800px';
+      videoContainer.style.aspectRatio = '16 / 9';
+      videoContainer.style.backgroundColor = '#000';
+      videoContainer.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.5)';
 
-  const closeButton = document.createElement('button');
-  closeButton.className = 'modal-close-button';
-  closeButton.textContent = 'X';
-  closeButton.style.position = 'absolute';
-  closeButton.style.top = '10px';
-  closeButton.style.right = '10px';
-  closeButton.style.fontSize = '24px';
-  closeButton.style.color = '#fff';
-  closeButton.style.background = 'transparent';
-  closeButton.style.border = 'none';
-  closeButton.style.cursor = 'pointer';
+      const closeButton = document.createElement('button');
+      closeButton.className = 'modal-close-button';
+      closeButton.textContent = 'X';
+      closeButton.style.position = 'absolute';
+      closeButton.style.top = '10px';
+      closeButton.style.right = '10px';
+      closeButton.style.fontSize = '24px';
+      closeButton.style.color = '#fff';
+      closeButton.style.background = 'transparent';
+      closeButton.style.border = 'none';
+      closeButton.style.cursor = 'pointer';
 
-  const iframe = document.createElement('iframe');
-  iframe.src = `https://www.youtube.com/embed/${trailerUrl}?autoplay=1&controls=1`;
-  iframe.style.width = '100%';
-  iframe.style.height = '100%';
-  iframe.style.border = 'none';
-  iframe.allowFullscreen = true;
-  iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${trailerUrl}?autoplay=1&controls=1`;
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      iframe.style.border = 'none';
+      iframe.allowFullscreen = true;
+      iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
 
 
-  videoContainer.appendChild(closeButton);
-  videoContainer.appendChild(iframe);
-  modalOverlay.appendChild(videoContainer);
+      videoContainer.appendChild(closeButton);
+      videoContainer.appendChild(iframe);
+      modalOverlay.appendChild(videoContainer);
 
-  document.body.appendChild(modalOverlay);
+      document.body.appendChild(modalOverlay);
 
-  const closeModal = () => {
-    document.body.removeChild(modalOverlay);
-  };
-  closeButton.addEventListener('click', closeModal);
-  modalOverlay.addEventListener('click', (e) => {
-    if (e.target === modalOverlay) {
-      closeModal();
+      const closeModal = () => {
+        document.body.removeChild(modalOverlay);
+      };
+      closeButton.addEventListener('click', closeModal);
+      modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+          closeModal();
+        }
+      });
     }
-  });
-}
 
     const trianglediv = document.createElement("div");
     trianglediv.className = "triangle-div";
@@ -243,6 +242,9 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
 
     const ul = document.createElement('ul');
     ul.className = 'actores-list';
+    ul.id = 'actores-list';
+
+    
 
 
 
@@ -250,6 +252,8 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
 
     actoresList.forEach(actor => {
       const li = document.createElement('li');
+      li.className = 'actor-item';
+      li.id = 'actor-item';
 
       const img = document.createElement('img');
       img.src = actor.photo;
@@ -346,6 +350,7 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
 
     const ul = document.createElement('ul');
     ul.className = 'recommendations-list';
+    ul.id = 'recommendations-list';
     ul.style.listStyleType = 'none';
     const recomendacionesList = recommendationsArray || [];
 
@@ -368,6 +373,10 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
         img.src = rec.poster;
         img.alt = rec.title;
         img.className = 'recommendation-poster';
+        img.id = "recommendation-poster";
+        img.addEventListener('click', () => {
+          showMovieDetails(rec.id, mainContainer, headerContainer, onBackCallback, savedScroll);
+        });
         const title = document.createElement('p');
         title.textContent = rec.title;
         title.className = 'recommendation-title';
@@ -403,6 +412,33 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
 
 
   mainContainer.appendChild(contentWrapper);
+
+
+  const slider = document.querySelector('.actores-list');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    // Detectar clic presionado, movimiento y soltado
+    slider.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => isDown = false);
+    slider.addEventListener('mouseup', () => isDown = false);
+
+    slider.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault(); // Evita selección de texto o arrastre nativo
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 2; // Velocidad del arrastre
+      slider.scrollLeft = scrollLeft - walk; // Actualiza posición
+    });
+
+
+    
 
   // 4. El botón de regresar
   document.getElementById('btn-back').addEventListener('click', () => {
