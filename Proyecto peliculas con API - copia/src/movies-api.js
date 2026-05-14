@@ -38,7 +38,7 @@ function formatMovieDetails(apiData) {
     .map(prod => prod.name)
     .join(', ');
 
-  const categorias = apiData.genres.slice(0, 3).map(g => g.name).join('  ');
+  const categorias = apiData.genres.slice(0, 2).map(g => g.name).join(', ');
 
   const peliculasRecomendadas = apiData.recommendations.results
     .slice(0, 9)
@@ -64,12 +64,13 @@ function formatMovieDetails(apiData) {
     recommendations: peliculasRecomendadas,
     cast: reparto,
     reviews: apiData.reviews.results
-      .slice(0, 2)
+      .slice(0, 4)
       .map(review => ({
         author: review.author,
         content: review.content || review.text,
         // Aseguramos que el contenido no sea demasiado largo
-        content: review.content && review.content.length > 400 ? review.content.substring(0, 800) + '...' : review.content || review.text,
+        content: review.content && review.content.length > 200 ? review.content.substring(0, 200) + ' ver más...' : review.content || review.text,
+        rating: review.author_details && review.author_details.rating ? review.author_details.rating : 'N/A',
         authordetails: review.author_details && review.author_details.avatar_path ? `https://image.tmdb.org/t/p/w200${review.author_details.avatar_path}` : `https://ui-avatars.com/api/?name=${encodeURIComponent(review.author || 'U')}&background=random&color=fff`,
       })),
     trailerKey: trailerVideo ? trailerVideo.key : null,

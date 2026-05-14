@@ -244,7 +244,7 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
     ul.className = 'actores-list';
     ul.id = 'actores-list';
 
-    
+
 
 
 
@@ -281,17 +281,20 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
   function createReviewsDetails(reviewsArray) {
     const divResenas = document.createElement('div');
     divResenas.className = 'reviews-container';
-    divResenas.style.width = '100%';
+    divResenas.style.width = '1500px';
     divResenas.style.marginTop = '40px';
+    divResenas.style.padding = '20px 20px 0px 20px';
+    divResenas.style.backgroundColor = '#1a293b';
 
     const tituloResenas = document.createElement('h2');
     tituloResenas.className = 'reviews-title';
-    tituloResenas.textContent = 'Reseñas';
+    tituloResenas.textContent = 'Reseñas de Usuarios';
     divResenas.appendChild(tituloResenas);
 
     const ul = document.createElement('ul');
     ul.className = 'reviews-list';
     ul.style.listStyleType = 'none';
+    ul.style.padding = '0';
 
     const resenasList = reviewsArray || [];
 
@@ -322,6 +325,11 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
         author.textContent = review.author || 'Usuario Anónimo';
         divAuthor.append(authorphoto, author);
 
+        const authorRating = document.createElement('p');
+        authorRating.className = 'review-author-rating';
+        authorRating.textContent = review.rating !== 'N/A' ? `Rating: ${review.rating}/10` : 'Rating: N/A';
+        divAuthor.appendChild(authorRating);
+
         const content = document.createElement('p');
         content.className = 'review-content';
         content.textContent = review.content || review.text;
@@ -343,6 +351,7 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
     divRecomendaciones.className = 'recommendations-container';
     divRecomendaciones.style.width = '100%';
     divRecomendaciones.style.marginTop = '40px';
+
     const tituloRecomendaciones = document.createElement('h2');
     tituloRecomendaciones.className = 'recommendations-title';
     tituloRecomendaciones.textContent = 'Películas Recomendadas';
@@ -374,13 +383,22 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
         img.alt = rec.title;
         img.className = 'recommendation-poster';
         img.id = "recommendation-poster";
+        img.addEventListener('dragstart', (e) => e.preventDefault());
         img.addEventListener('click', () => {
           showMovieDetails(rec.id, mainContainer, headerContainer, onBackCallback, savedScroll);
         });
-        const title = document.createElement('p');
+        const title = document.createElement('h3');
         title.textContent = rec.title;
         title.className = 'recommendation-title';
-        divRecItem.append(img, title);
+
+
+        const titleyear = document.createElement('p');
+        titleyear.textContent = `(${rec.year}) • ${detalles.genres}`;
+        titleyear.className = 'recommendation-year';
+
+
+
+        divRecItem.append(img, title, titleyear);
 
 
         li.append(divRecItem);
@@ -413,32 +431,48 @@ export async function showMovieDetails(movieId, mainContainer, headerContainer, 
 
   mainContainer.appendChild(contentWrapper);
 
+  
+  
+  let isScrolling = false;
+  
+  const sliders = document.querySelectorAll('.actores-list, .recommendations-list');
 
-  const slider = document.querySelector('.actores-list');
+  sliders.forEach((slider) => {
     let isDown = false;
     let startX;
     let scrollLeft;
 
-    // Detectar clic presionado, movimiento y soltado
     slider.addEventListener('mousedown', (e) => {
       isDown = true;
+      slider.classList.add('active'); // Opcional: para cambiar el cursor en CSS
       startX = e.pageX - slider.offsetLeft;
       scrollLeft = slider.scrollLeft;
     });
 
-    slider.addEventListener('mouseleave', () => isDown = false);
-    slider.addEventListener('mouseup', () => isDown = false);
+    slider.addEventListener('mouseleave', () => {
+      isDown = false;
+    });
+
+    slider.addEventListener('mouseup', () => {
+      isDown = false;
+      setTimeout(() => { isScrolling = false; }, 10);
+    });
 
     slider.addEventListener('mousemove', (e) => {
       if (!isDown) return;
-      e.preventDefault(); // Evita selección de texto o arrastre nativo
+      isScrolling = true;
+      e.preventDefault();
       const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startX) * 2; // Velocidad del arrastre
-      slider.scrollLeft = scrollLeft - walk; // Actualiza posición
+      const walk = (x - startX) * 2; // Velocidad de desplazamiento
+      slider.scrollLeft = scrollLeft - walk;
     });
+  });
 
 
-    
+
+
+
+
 
   // 4. El botón de regresar
   document.getElementById('btn-back').addEventListener('click', () => {

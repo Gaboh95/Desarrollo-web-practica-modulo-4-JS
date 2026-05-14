@@ -228,8 +228,7 @@
     padding: 10px;
     overflow-x: auto;
     overscroll-behavior: smooth;
-    scrollbar-width: none;
-    scrollbar-color: #888 transparent;
+    scrollbar-width: none;    
     justify-content: flex-start;
     cursor: grab;
 
@@ -286,13 +285,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 90px;
+    padding-top: 50px;
 
 
     .reviews-title {
         width: 100%;
-        max-width: 1500px;
+        max-width: 1430px;
         padding-left: 20px;
+        padding-bottom: 20px;
         text-align: left;
         font-size: 28px;
         font-weight: bold;
@@ -301,15 +301,21 @@
 
     .review-item {
         width: 100%;
-        max-width: 1500px;
+        max-width: 1400px;
         background-color: rgba(25, 24, 34, 0.452);
         border-radius: 8px;
         border: 2px solid #151535;
         -webkit-box-shadow: -1px 2px 15px 0px #c99999;
         box-shadow: -1px 2px 15px 0px #000000;
-        margin: 10px 0px 60px 10px;
-        padding: 15px 0px 15px 15px;
+        margin: 10px 10px 40px 10px;
+        padding: 15px 15px 15px 15px;
 
+        .review-author-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
         .review-author {
             font-weight: bold;
             font-size: 16px;
@@ -318,10 +324,16 @@
             color: rgb(255, 251, 251);
 
         }
+        .review-author-rating {
+            margin-left: auto;
+            font-size: 14px;
+            color: #f5c842;
+            
+        }
 
         .review-author-photo {
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             object-fit: cover;
             margin-right: 10px;
@@ -346,14 +358,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 90px;
+    padding-top: 50px;
+    user-select: none;
 
     .recommendations-title {
         width: 100%;
         max-width: 1500px;
         padding-left: 20px;
         text-align: left;
-        font-size: 28px;
+        font-size: 29px;
         font-weight: bold;
     }
 
@@ -369,6 +382,7 @@
         scrollbar-width: none;
         scrollbar-color: #888 transparent;
         justify-content: flex-start;
+        
         cursor: grab;
 
 
@@ -383,47 +397,65 @@
             margin: 0px 4px 10px 10px;
             padding: 0px;
             transition: transform 0.3s ease;
+            transition: all 0.3s ease-in-out;
             overflow: hidden;
+            
 
             .recommendation-item-container {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                transition: all 1.3s ease;
+                
             }
 
             .recommendation-poster {
-                width: 300px;
-                height: 500px;
+                position: relative;
+                width: 200px;
+                height: 300px;
                 object-fit: cover;
                 border-radius: 8px;
                 display: block;
+                user-select: none;
+                -webkit-user-drag: none;
+                pointer-events: auto;
             }
 
             .recommendation-title {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                color: rgb(255, 251, 251);
-                font-weight: bold;
-                font-size: 24px;
-                padding: 15px 9px;
-                background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+                
+
                 display: none;
-                z-index: 2;
+            }
+            .recommendation-year {
+                display: none;
             }
 
             &:hover {
                 transform: scale(1.03);
-
+                transition: all 0.4s ease-in-out;
+                
                 cursor: pointer;
 
                 .recommendation-poster {
                     filter: brightness(50%);
+                    
                 }
 
                 .recommendation-title {
-                    display: block;
+                    display: flex;
+                    position: absolute;
+                    font-size: 18px;
+                    left: 10px;
+                    bottom: 25px;
+                }
+
+                .recommendation-year {
+                    display: flex;
+                    position: absolute;
+                    bottom: 0px;
+                    left: 10px;
+                    font-size: 11px;
+                    
                 }
             }
         }
